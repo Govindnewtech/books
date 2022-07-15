@@ -145,7 +145,6 @@ router.post("/category/delete", async (req, res) => {
 
 router.post("/category", async (req, res) => {
   try {
-
     const userId = req.body.userId
     const categories = await Category.find({ userId: userId });
     res.status(200).json({
