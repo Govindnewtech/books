@@ -128,6 +128,17 @@ router.post("/category/update", async (req, res) => {
   }
 
 });
+// without
+router.get("/cat/all", async (req, res) => {
+  try {
+    const categories = await Category.find();
+    res.status(200).json({
+      categories
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //DELETE
 router.post("/category/delete", async (req, res) => {
