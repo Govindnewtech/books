@@ -1,9 +1,14 @@
+const mongoose = require('mongoose');
+// const url = "mongodb://localhost:27017/stationery";
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://admin:<password>@cluster0.slwmg.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
+
+const url = 'mongodb+srv://aakash:akki8817@pushtak.pyht9.mongodb.net/Pushtak?retryWrites=true&w=majority';
+// const url = 'mongodb+srv://govind_kewat:8ndbaL1uxYHWTDJy@cluster0.qegpu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
+mongoose.connect(url, {
+    useNewUrlParser: true, useUnifiedTopology: true,
+}).then(() => {
+    console.log("connection sucessfull");
+}).catch((e) => {
+    console.log("no connection");
 });
