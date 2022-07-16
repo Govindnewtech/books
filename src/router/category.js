@@ -141,12 +141,13 @@ router.get("/cat/all", async (req, res) => {
 });
 
 //DELETE
-router.post("/category/delete", async (req, res) => {
+
+
+router.delete("/catdelete/:delete_id", async (req, res) => {
   try {
-    const _id = req.body.id;
-    // const userId = req.body.userId;
-    await Category.findByIdAndDelete(_id);
-    res.status(200).json("Category has been deleted...");
+    const _id = req.params.delete_id;
+    await vendor.findByIdAndDelete(_id);
+    res.status(200).json("vendor has been deleted...");
   } catch (err) {
     res.status(500).json(err);
   }
