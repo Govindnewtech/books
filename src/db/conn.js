@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 
 // const url = 'mongodb+srv://aakash:akki8817@pushtak.pyht9.mongodb.net/Pushtak?retryWrites=true&w=majority';
-const url = 'mongodb+srv://admin:ntf12345@cluster0.slwmg.mongodb.net/Cluster0?retryWrites=true&w=majority'
+const url = 'mongodb+srv://admin:ntf12345@cluster0.slwmg.mongodb.net/Cluster0?retryWrites=true&w=majority';
 
 mongoose.connect(url, {
     useNewUrlParser: true, useUnifiedTopology: true,
