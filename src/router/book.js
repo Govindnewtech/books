@@ -113,7 +113,7 @@ router.post("/book", multipleupload, async (req, res) => {
 // });
 
 // without id get all cat
-router.get("/book/all", async ( res) => {
+router.get("/book/all", async (req, res) => {
   try {
     const books = await book.find();
     res.status(200).json({
