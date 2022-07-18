@@ -112,6 +112,18 @@ router.post("/book/all", async (req, res) => {
   }
 });
 
+// without id get all cat
+router.get("/all/book", async ( res) => {
+  try {
+    const books = await book.find();
+    res.status(200).json({
+      books
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // book get by id
 router.get("/book/:id", async (req, res) => {
 
