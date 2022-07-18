@@ -101,19 +101,19 @@ router.post("/book", multipleupload, async (req, res) => {
 
 // //GET ALL
 
-router.post("/book/all", async (req, res) => {
-  try {
-    const id = req.body.userId;
+// router.post("/book/all", async (req, res) => {
+//   try {
+//     const id = req.body.userId;
 
-    const books = await book.find({ userId: id });
-    res.status(200).json({ books });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     const books = await book.find({ userId: id });
+//     res.status(200).json({ books });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 // without id get all cat
-router.get("/all/book", async ( res) => {
+router.get("/book/all", async ( res) => {
   try {
     const books = await book.find();
     res.status(200).json({
