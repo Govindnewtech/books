@@ -143,9 +143,9 @@ router.get("/cat/all", async (req, res) => {
 //DELETE
 
 
-router.delete("/catdelete/:delete_id", async (req, res) => {
+router.delete("/catdelete/:_id", async (req, res) => {
   try {
-    const _id = req.params.delete_id;
+    const _id = req.params._id;
     await vendor.findByIdAndDelete(_id);
     res.status(200).json("vendor has been deleted...");
   } catch (err) {
