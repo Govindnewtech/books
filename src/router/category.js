@@ -39,7 +39,7 @@ router.post("/category/add", async (req, res) => {
     if (categories.length == 0) {
       const public = './public/'
       
-      const Fpath = 'uploads/category/' + new Date().getTime().toString() + '.jpg'
+      const Fpath = '/uploads/category/' + new Date().getTime().toString() + '.jpg'
       fs.writeFileSync(public + Fpath, front, { encoding: 'base64' })
 
 
