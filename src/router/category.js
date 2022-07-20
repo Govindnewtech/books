@@ -37,7 +37,8 @@ router.post("/category/add", async (req, res) => {
     const categories = await Category.find({ name: name });
 
     if (categories.length == 0) {
-      const public = './public'
+      const public = '/public'
+      
       const Fpath = '/uploads/category/' + new Date().getTime().toString() + '.jpg'
       fs.writeFileSync(public + Fpath, front, { encoding: 'base64' })
 
