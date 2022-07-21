@@ -36,21 +36,19 @@ router.post("/category/add", async (req, res) => {
 
     const categories = await Category.find({ name: name });
 
-    if (categories.length == 0) {
+   if (categories.length == 0) {
       const public = './public/'
-      
-      const Fpath = '/uploads/category/' + new Date().getTime().toString() + '.jpg'
-      fs.writeFileSync(public + Fpath, front, { encoding: 'base64' })
-
+      const Fpath = 'https://book-api-ntf.herokuapp.com/uploads/books/images/' + new Date().getTime().toString() + '.jpg'
+      fs.writeFileSync(Fpath, front, { encoding: 'base64' })
 
       const newCategory = new Category({
-        userId, name, description, front: APIURL + Fpath
+        userId, name, description, front: Fpath
       });
 
 
       const savedCategory = await newCategory.save();
       return res.status(200).json(savedCategory);
-    } 
+    }
     else {
       return res.status(200).json({
         'code': 201,
