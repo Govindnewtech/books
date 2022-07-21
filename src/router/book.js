@@ -20,7 +20,7 @@ const {
 
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "/root/stationery/public/uploads/books/images");
+    cb(null, "/root/book-api-ntf/public/uploads/books/images");
   },
   filename: (req, file, cb) => {
     const filename = file.originalname;
