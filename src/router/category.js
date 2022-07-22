@@ -138,6 +138,19 @@ router.get("/cat/all", async (req, res) => {
   }
 });
 
+
+router.put('/category/edit', async (req,res)=>{
+  const {id , userId, name, description, front} = req.body;
+  const newData = await Category.findByIdAndUpdate({_id : id}, { 
+    userId: userId, 
+    name: name, 
+    description: description,
+    front: front }, {
+    new: true
+  });
+  res.status(200).send(newData);
+})
+
 //DELETE
 
 
