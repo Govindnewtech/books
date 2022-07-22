@@ -11,22 +11,6 @@ const APIURL = process.env.API_URL;
 //  Example  authenticate about page 
 // ------------------------
 
-
-// router.get('/about' , AdminToken , (req,res) => {
-//   res.send(req.rootUser);
-// })
-
-//-----------------------   
-// Example logout user
-// ------------------------
-
-
-// router.get("/logout" , (req, res) => {
-//   res.clearCookie('jwt' ,{ path: "/"});
-//   res.status(200).send('user logout')
-// })
-
-
 //CREATE
 
 router.post("/category/add", async (req, res) => {
@@ -66,30 +50,22 @@ router.post("/category/add", async (req, res) => {
 //UPDATE
 router.post("/category/update", async (req, res) => {
   try {
-
-    const { id, userId, name, description, front } = req.body
-
-
-
+    const { catId, userId, name, description, front } = req.body
     if (front != '') {
-
       const public = './public'
       const Fpath = '/uploads/category/' + new Date().getTime().toString() + '.jpg'
       fs.writeFileSync(public + Fpath, front, { encoding: 'base64' })
-      const category = await Category.findById(id);
+      const category = await Category.findById(catId);
       const cname = category.name;
       const Book = await book.find({ userId: userId, classes: cname });
-
       if (Book != '') {
         const bookid = Book[0]._id;
-
-
         const updateBook = await book.findByIdAndUpdate(bookid, { classes: name }, {
           new: true
         })
       }
 
-      const newData = await Category.findByIdAndUpdate(id, { userId: userId, name: name, description: description, front: APIURL + Fpath }, {
+      const newData = await Category.findByIdAndUpdate(catId, { userId: userId, name: name, description: description, front: APIURL + Fpath }, {
         new: true
       });
       return res.status(200).json(updateBook);
@@ -109,22 +85,15 @@ router.post("/category/update", async (req, res) => {
           new: true
         })
       }
-
-      const newData = await Category.findByIdAndUpdate(id, { userId: userId, name: name, description: description }, {
+      const newData = await Category.findByIdAndUpdate(catId, { userId: userId, name: name, description: description }, {
         new: true
       });
       return res.status(200).json(newData);
-
     }
-
-
-
-
   } catch (error) {
 
     res.status(404).send(error);
   }
-
 });
 // without
 router.get("/cat/all", async (req, res) => {
