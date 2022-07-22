@@ -141,11 +141,15 @@ router.get("/cat/all", async (req, res) => {
 
 router.put('/category/edit', async (req,res)=>{
   const {id , userId, name, description, front} = req.body;
-  const newData = await Category.findByIdAndUpdate({_id : id}, { 
-    userId: userId, 
-    name: name, 
+  const public = './public'
+  const Fpath = '/uploads/category/' + new Date().getTime().toString() + '.jpg'
+  fs.writeFileSync(public + Fpath, front, { encoding: 'base64' })
+  const newData = await Category.findByIdAndUpdate({_id : id},{
+    userId: userId,
+    name:name,
     description: description,
-    front: front }, {
+    front: APIURL + Fpath
+  }, {
     new: true
   });
   res.status(200).send(newData);
