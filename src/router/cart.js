@@ -178,6 +178,17 @@ router.get("/cart/:id", multipleupload, async (req, res) => {
   }
 });
 
+router.get("/all/cart", async (req, res) => {
+  try {
+    const carts = await Cart.find();
+    res.status(200).json({
+      carts
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // //GET ALL
 
 router.get("/cart/all", async (req, res) => {
