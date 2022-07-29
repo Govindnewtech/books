@@ -5,37 +5,42 @@ const book = require('../models/book_upload');
 
 const fs = require('fs')
 const { VendorAuth, AdminAuth } = require('../middleware/authenticate')
-const APIURL = process.env.API_URL;
-
-//-----------------------   
-//  Example  authenticate about page 
-// ------------------------
+const APIURL = 'http://localhost:8000'
 
 
-// router.get('/about' , AdminToken , (req,res) => {
-//   res.send(req.rootUser);
-// })
-
-//-----------------------   
-// Example logout user
-// ------------------------
-
-
-// router.get("/logout" , (req, res) => {
-//   res.clearCookie('jwt' ,{ path: "/"});
-//   res.status(200).send('user logout')
-// })
 
 
 //CREATE
 
+router.post("/category/sub" , async (req, res)=> {
+  const {category_id, subCategory_name} = req.body;
+  console.log(req.body);
+  let category = await Category.findOne({ '_id': category_id});
+  console.log(category);
+  category.subCategory.push({
+    subCategory_name: subCategory_name,
+  })
+  cart = await category.save();
+  return res.status(200).json({cart});
+})
+
+// router.post("/category/sub-update" , async (req, res)=> {
+//   const {category_id,subcategory_id, subCategory_name} = req.body;
+//   console.log(req.body);
+//   let category = await Category.findByIdAndUpdate({ "_id": category_id},
+//   req.body,
+//   {new:true});
+//   console.log(category);
+//   return res.status(200).json({category});
+// })
+
 router.post("/category/add", async (req, res) => {
   try {
 
-    const { userId, name, description, front } = req.body;
-
+    const { userId, name,subCategory_name, description, front } = req.body;
+// console.log(req.body.subCategory_name);
     const categories = await Category.find({ name: name });
-
+console.log(categories);
     if (categories.length == 0) {
       const public = './public'
       const Fpath = '/uploads/category/' + new Date().getTime().toString() + '.jpg'
@@ -47,7 +52,7 @@ router.post("/category/add", async (req, res) => {
 
       const savedCategory = await newCategory.save();
       return res.status(200).json(savedCategory);
-    } 
+    }
     else {
       return res.status(200).json({
         'code': 201,
