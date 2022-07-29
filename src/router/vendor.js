@@ -68,7 +68,12 @@ router.post("/login", upload.any(), async (req, res) => {
           message: "Incorrect Password"
         })
       } else {
-        return res.status(200).json(result);
+        return res.status(200).json({
+          code: 200,
+          status: "working",
+          data : result,
+          message: "login sucessfull"
+        })
       }
     } else {
       return res.status(200).json({
@@ -91,17 +96,7 @@ router.post("/login", upload.any(), async (req, res) => {
 
 
 //UPDATE
-// router.route("/venderupdate/:id").post(function(req, res) {
-//   try {  
-//     const id = req.params.id; 
-//     const updates = req.body; 
-//     const options ={ new: true };
-//     const updatedvendor = await vendor.findByIdAndUpdate(_id, updates, options);
-//     res.status(200).json(updatedvendor);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+
 
 router.put("/vendorupdate/:userId", upload.any(), async (req, resp) => {
   try {
